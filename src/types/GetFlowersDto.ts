@@ -1,4 +1,4 @@
-export interface GetFLowersDto {
+export interface GETFLOWERSDTO {
     color: string;
     searchTerms: string;
 }

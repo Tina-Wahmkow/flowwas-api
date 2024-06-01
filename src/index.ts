@@ -1,50 +1,50 @@
-import express, { json, Express, Request, Response } from 'express';
-import { config } from 'dotenv';
-import './getFlowers.ts';
-import getFlowers from './getFlowers.ts';
+import express, { json } from "express";
+import getFlowers from "./getFlowers";
+import { GETFLOWERSDTO } from "./types/GetFlowersDto";
+import FLOWER from "./types/Flower";
 
-config();
-const app: Express  = express();
-app.use(json());
-
+const app = express();
 const port = 3000;
 
+app.get("/", (req, res) => {
+  res.send("Hello, TypeScript with Express!");
+});
+
 app.listen(port, () => {
-   console.log("Server Listening on PORT:", port);
-   console.log("Available under URL: 'http://localhost:3000'", port);
+  console.log("Server Listening on PORT:", port);
+  console.log("Available under URL: 'http://localhost:3000'");
 });
 
-app.get("/flowers", (request: Request, response: Response) => {
-   const result = getFlowers(request.params.color);
+app.get("/flowers", async (request, response) => {
+  const result = await getFlowers((request.query as unknown as GETFLOWERSDTO).color);
 
-   response.send(result);
+  response.json(result)
 });
 
-app.get("/{userid}/bouquets", (request: Request, response: Response) => {
-   const status = {
-      "Status": "Running"
-   };
+app.get("/{userid}/bouquets", (request, response) => {
+  const status = {
+    Status: "Running",
+  };
 
-   response.send(status);
+  response.send(status);
 });
 
-app.put("/bouquet", (request: Request, response: Response) => {
-   const status = {
-      "Status": "Running"
-   };
+app.put("/bouquet", (request, response) => {
+  const status = {
+    Status: "Running",
+  };
 
-   response.send(status);
+  response.send(status);
 });
 
-app.delete("/bouquet", (request: Request, response: Response) => {
-   const status = {
-      "Status": "Running"
-   };
+app.delete("/bouquet", (request, response) => {
+  const status = {
+    Status: "Running",
+  };
 
-   response.send(status);
+  response.send(status);
 });
 
-app.get('/', (req, res) => {
-   res.send('Hello, World!');
+app.get("/", (req, res) => {
+  res.send("Hello, World!");
 });
-

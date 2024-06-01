@@ -1,44 +1,38 @@
-import oracledb, { ConnectionAttributes } from 'oracledb';
-import dbConfig from './config/dbconfig';
+import DBClient from "./dbUtils/dbClient";
+import FLOWER from "./types/Flower";
+import { DBFLOWER } from "./types/db-responses/DbFlower";
 
 export default async function getFlowers(color: string) {
-    await run(color);
+  const res = await getFlowersFromDB(color);
+  if (res) return convertFlowerData(res);
+  else return "no Results found";
 }
 
-async function run(color: string) {
-    let connection;
+async function getFlowersFromDB(color: string) {
+  const dbClient = new DBClient();
 
-    try {
-        connection = await oracledb.getConnection(dbConfig as ConnectionAttributes);
+  try {
+    await dbClient.connect();
+    const query = `SELECT * FROM flowers WHERE color = :color`;
+    const result: DBFLOWER[] = (
+      await dbClient.executeQuery(query, [color])
+    ).rows;
 
-        const result = await connection.execute(
-            `SELECT *
-             FROM flowers
-             WHERE color = :color`,
+    return result;
+  } catch (err) {
+    console.error("Error in getFlowers: ", err);
+  } finally {
+    await dbClient.disconnect();
+  }
+}
 
-            // The "bind value" 3 for the bind variable ":idbv"
-            [color],
-
-            // Options argument.  Since the query only returns one
-            // row, we can optimize memory usage by reducing the default
-            // maxRows value.  For the complete list of other options see
-            // the documentation.
-            /* {
-                maxRows: 1
-                //, outFormat: oracledb.OUT_FORMAT_OBJECT  // query result format
-                //, fetchArraySize: 100                    // internal buffer allocation size for tuning
-            } */);
-        return result;
-    } catch (err) {
-        console.error(err);
-    } finally {
-        if (connection) {
-            try {
-                // Connections should always be released when not needed
-                await connection.close();
-            } catch (err) {
-                console.error(err);
-            }
-        }
-    }
+function convertFlowerData(data: DBFLOWER[]): FLOWER[] {
+  return data.map(([id, name, latin_name, color, image, description]) => ({
+    id,
+    name,
+    latin_name,
+    color,
+    image,
+    description: description.replace(/\n/g, " "),
+  }));
 }

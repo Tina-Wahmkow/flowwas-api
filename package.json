@@ -2,13 +2,10 @@
   "name": "flowwas-api",
   "version": "1.0.0",
   "description": "Backend for flowwas Frontend",
-  "main": "dist/index.js",
-  "type": "module",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npx tsc",
-    "start": "node dist/index.js",
-    "dev": "nodemon src/index.ts"
+    "start": "ts-node src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -16,21 +13,14 @@
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Tina-Wahmkow/flowwas-api/issues"
-  },
   "homepage": "https://github.com/Tina-Wahmkow/flowwas-api#readme",
   "dependencies": {
-    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "oracledb": "^6.5.1"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
-    "@types/node": "^20.12.13",
     "@types/oracledb": "^6.5.1",
-    "globals": "^15.3.0",
-    "nodemon": "^3.1.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   }
