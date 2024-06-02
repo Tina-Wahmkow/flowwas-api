@@ -1,7 +1,7 @@
-import express, { json } from "express";
+import express from "express";
 import getFlowers from "./getFlowers";
 import { GETFLOWERSDTO } from "./types/GetFlowersDto";
-import FLOWER from "./types/Flower";
+import deleteBouquet from "./deleteBouquet";
 
 const app = express();
 const port = 3000;
@@ -15,12 +15,15 @@ app.listen(port, () => {
   console.log("Available under URL: 'http://localhost:3000'");
 });
 
+// get flowers based on certain filter criteria, e.g. color (1), description (n), name (1), latin_name (1), association
 app.get("/flowers", async (request, response) => {
-  const result = await getFlowers((request.query as unknown as GETFLOWERSDTO).color);
-
-  response.json(result)
+  const result = await getFlowers(
+    (request.query as unknown as GETFLOWERSDTO).color
+  );
+  response.json(result);
 });
 
+// get all bouquets including their flowers for the user with the given userId
 app.get("/{userid}/bouquets", (request, response) => {
   const status = {
     Status: "Running",
@@ -29,7 +32,8 @@ app.get("/{userid}/bouquets", (request, response) => {
   response.send(status);
 });
 
-app.put("/bouquet", (request, response) => {
+// create a new bouquet or update an existing one
+app.put("/bouquets", (request, response) => {
   const status = {
     Status: "Running",
   };
@@ -37,14 +41,10 @@ app.put("/bouquet", (request, response) => {
   response.send(status);
 });
 
-app.delete("/bouquet", (request, response) => {
-  const status = {
-    Status: "Running",
-  };
+// delete a bouquet based on the given bouquetId
+app.delete("/bouquets/:bouquetId", async (request, response) => {
+  const result = await deleteBouquet(request.params.bouquetId);
 
-  response.send(status);
-});
-
-app.get("/", (req, res) => {
-  res.send("Hello, World!");
+  if (result) response.status(204);
+  else response.status(404);
 });
