@@ -51,8 +51,6 @@ EXEC Ctx_Thes.Create_Relation('flower-thes', 'Trauer', 'SYN', 'Erinnerung');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Trauer', 'SYN', 'Tod');
 
 
-
-
 /* 
     Relationen für Angst
 */
@@ -78,6 +76,7 @@ EXEC Ctx_Thes.Create_Relation('flower-thes', 'Freude', 'SYN', 'Glücklich');
 /* --- */
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Freude', 'SYN', 'Glückseligkeit');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Freude', 'SYN', 'Vorfreude');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Freude', 'SYN', 'Geburtstag');
 
 
 /* 
@@ -87,6 +86,11 @@ EXEC Ctx_Thes.Create_Relation('flower-thes', 'Liebe', 'SYN', 'Reinheit');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Liebe', 'SYN', 'Charme');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Liebe', 'SYN', 'Schönheit');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Liebe', 'SYN', 'Romantik');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Liebe', 'SYN', 'Zweisamkeit');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Liebe', 'SYN', 'Date');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Liebe', 'SYN', 'Abendessen');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Liebe', 'SYN', 'Kuscheln');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Liebe', 'SYN', 'Gespräch');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Liebe', 'SYN', 'Partner');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Liebe', 'SYN', 'Partnerschaft');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Liebe', 'SYN', 'Jubiläum');
@@ -108,10 +112,12 @@ EXEC Ctx_Thes.Create_Relation('flower-thes', 'Liebe', 'SYN', 'Verliebtheit');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Liebe', 'SYN', 'Sinnlichkeit');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Liebe', 'SYN', 'Verabredung');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Liebe', 'SYN', 'Beziehung');
-
-
-
-
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Liebe', 'SYN', 'Faszination');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Liebe', 'SYN', 'Eroberung');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Liebe', 'SYN', 'Frauentag');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Liebe', 'SYN', 'Hochzeit');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Liebe', 'SYN', 'Jahrestag');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Liebe', 'SYN', 'Valentinstag');
 
 
 /* 
@@ -126,12 +132,20 @@ EXEC Ctx_Thes.Create_Relation('flower-thes', 'Hoffnug', 'SYN', 'Heilung');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Hoffnug', 'SYN', 'Krankenbesuch');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Hoffnug', 'SYN', 'Krankheitsfall');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Hoffnug', 'SYN', 'Kraft');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Hoffnug', 'SYN', 'Erholung');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Hoffnug', 'SYN', 'Gesundheit');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Hoffnug', 'SYN', 'Besserung');
+
+
 /* --- */
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Hoffnug', 'SYN', 'Schutz');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Hoffnug', 'SYN', 'Frühling');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Hoffnug', 'SYN', 'Fruchtbarkeit');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Hoffnug', 'SYN', 'Erneuerung');
-
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Hoffnug', 'SYN', 'Träumen');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Hoffnug', 'SYN', 'Traum');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Hoffnug', 'SYN', 'Geduld');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Hoffnug', 'SYN', 'Geburt');
 
 
 /* 
@@ -152,8 +166,14 @@ EXEC Ctx_Thes.Create_Relation('flower-thes', 'Erfolg', 'SYN', 'Perfektion');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Erfolg', 'SYN', 'Sieg');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Erfolg', 'SYN', 'Ehre');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Erfolg', 'SYN', 'Wohlstand');
-
-
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Erfolg', 'SYN', 'Beförderung');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Erfolg', 'SYN', 'Aufstieg');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Erfolg', 'SYN', 'Möglichkeit');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Erfolg', 'SYN', 'Selbstverwirklichung');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Erfolg', 'SYN', 'Veränderung');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Erfolg', 'SYN', 'Anerkennung');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Erfolg', 'SYN', 'Chance');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Erfolg', 'SYN', 'Zeremonie');
 
 
 /* 
@@ -165,8 +185,14 @@ EXEC Ctx_Thes.Create_Relation('flower-thes', 'Dankbarkeit', 'SYN', 'Wohlbefinden
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Dankbarkeit', 'SYN', 'Wertschätzung');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Dankbarkeit', 'SYN', 'Hilfe');
 /* --- */
-EXEC Ctx_Thes.Create_Relation('flower-thes', 'Dankbarkeit', 'SYN', 'Demut');
-
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Dankbarkeit', 'SYN', 'Muttertag');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Dankbarkeit', 'SYN', 'Mutter');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Dankbarkeit', 'SYN', 'Mama');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Dankbarkeit', 'SYN', 'Vatertag');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Dankbarkeit', 'SYN', 'Vater');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Dankbarkeit', 'SYN', 'Papa');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Dankbarkeit', 'SYN', 'Danke');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Dankbarkeit', 'SYN', 'Dank');
 
 
 /* 
@@ -175,6 +201,7 @@ EXEC Ctx_Thes.Create_Relation('flower-thes', 'Dankbarkeit', 'SYN', 'Demut');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Gleichgültigkeit', 'SYN', 'Unverbindlichkeit');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Gleichgültigkeit', 'SYN', 'Verschlossenheit');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Gleichgültigkeit', 'SYN', 'Verschwiegenheit');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Gleichgültigkeit', 'SYN', 'Überfluss');
 
 
 /* somehow positiv aber keine Kategorie */
