@@ -15,7 +15,7 @@ CREATE TABLE users (
     id NUMBER PRIMARY KEY,
     username VARCHAR2(20),
     password VARCHAR2(20),
-    isAdmin BOOLEAN
+    isAdmin NUMBER(1,0)
 );
 
 CREATE TABLE bouquets (
@@ -25,4 +25,17 @@ CREATE TABLE bouquets (
     constraint fk_user
         foreign key (user_id)
         references user(id)
+);
+
+CREATE TABLE bouquet_has_flower (
+    bouquet_id Number,
+    flower_id Number,
+    constraint fk_flower
+        foreign key (flower_id)
+        references flowers(id),
+    constraint fk_bouquet
+        foreign key (bouquet_id)
+        references bouquets(id),
+    constraint pk_bouquet
+        primary key (bouquet_id, flower_id)
 );
