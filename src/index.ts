@@ -2,6 +2,7 @@ import express from "express";
 import getFlowers from "./getFlowers";
 import { GETFLOWERSDTO } from "./types/GetFlowersDto";
 import deleteBouquet from "./deleteBouquet";
+import { readFromCSV } from "./dbImport";
 
 const app = express();
 const port = 3000;
@@ -47,4 +48,9 @@ app.delete("/bouquets/:bouquetId", async (request, response) => {
 
   if (result) response.status(204);
   else response.status(404);
+});
+
+app.post("/flowers/import-flowers-from-csv", (request, response) => {
+  readFromCSV();
+  response.status(204)
 });

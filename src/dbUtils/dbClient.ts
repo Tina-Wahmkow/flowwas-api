@@ -48,4 +48,18 @@ export default class DBClient {
       throw err;
     }
   }
+
+  async executeMany(query: string, binds: any[] = []): Promise<any> {
+    if (!this.connection) {
+      throw new Error("Not connected to the database");
+    }
+
+    try {
+      const result = await this.connection.executeMany(query, binds);
+      return result;
+    } catch (err) {
+      console.error("Query execution failed: ", err);
+      throw err;
+    }
+  }
 }
