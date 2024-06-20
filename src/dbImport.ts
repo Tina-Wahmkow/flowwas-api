@@ -42,7 +42,7 @@ function importFlowers(values: CSVFLOWER[]) {
 
 
 export function readFromCSV() {
-    const csvFilePath = path.resolve(__dirname, 'flower_data.csv');
+    const csvFilePath = path.resolve(__dirname, 'dbUtils/flower_data.csv');
 
     const headers = ['id', 'name', 'latin_name', 'color', 'image', 'link_image', 'description', 'link_description', 'association_term1', 'association_term2', 'association_term3', 'association_term4', 'association_term5', 'association_term6', 'association_term7', 'association_term8'];
 
