@@ -6,7 +6,9 @@ CREATE TABLE flowers (
     image VARCHAR2(100),
     description VARCHAR2(1800)
 );
-
+/**
+categories haben wir nicht mehr
+**/
 CREATE TABLE categories (
     name VARCHAR2(100) PRIMARY KEY
 );
