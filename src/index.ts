@@ -1,14 +1,26 @@
 import express from "express";
-import getFlowers from "./getFlowers";
-import { GETFLOWERSDTO } from "./types/GetFlowersDto";
+import { getFlowers } from "./getFlowers";
+import { getAllFlowers } from "./getFlowers";
 import deleteBouquet from "./deleteBouquet";
 import { readFromCSV } from "./dbImport";
+import { GETFLOWERSDTO } from "./types/GetFlowersDto";
 
 const app = express();
 const port = 3000;
 
 app.get("/", (req, res) => {
   res.send("Hello, TypeScript with Express!");
+});
+
+// Neuer Endpunkt zum Abrufen aller Inhalte und Spalten der Tabelle Flowers
+app.get('/allFlowers', async (req, res) => {
+  try {
+    const data = await getAllFlowers();
+    res.json(data);
+  } catch (err) {
+    console.error('Error in /allFlowers:', err);
+    res.status(500).send('Error fetching data from Oracle database');
+  }
 });
 
 app.listen(port, () => {
