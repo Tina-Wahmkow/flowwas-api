@@ -1,4 +1,5 @@
 import express from "express";
+import cors from 'cors';
 import { getFlowers } from "./getFlowers";
 import { getAllFlowers } from "./getFlowers";
 import deleteBouquet from "./deleteBouquet";
@@ -8,8 +9,27 @@ import { GETFLOWERSDTO } from "./types/GetFlowersDto";
 const app = express();
 const port = 3000;
 
+app.use(cors({
+  origin: 'http://localhost:3002', //reacts origin
+  methods: 'GET,POST,PUT,DELETE',
+  credentials: true
+}));
+
 app.get("/", (req, res) => {
   res.send("Hello, TypeScript with Express!");
+});
+
+app.listen(port, () => {
+  console.log("Server Listening on PORT:", port);
+  console.log("Available under URL: http://localhost:",port);
+});
+
+// get flowers based on certain filter criteria, e.g. color (1), description (n), name (1), latin_name (1), association
+app.get("/flowers", async (request, response) => {
+  const result = await getFlowers(
+    (request.query as unknown as GETFLOWERSDTO).color
+  );
+  response.json(result);
 });
 
 // Neuer Endpunkt zum Abrufen aller Inhalte und Spalten der Tabelle Flowers
@@ -23,18 +43,6 @@ app.get('/allFlowers', async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log("Server Listening on PORT:", port);
-  console.log("Available under URL: 'http://localhost:3000'");
-});
-
-// get flowers based on certain filter criteria, e.g. color (1), description (n), name (1), latin_name (1), association
-app.get("/flowers", async (request, response) => {
-  const result = await getFlowers(
-    (request.query as unknown as GETFLOWERSDTO).color
-  );
-  response.json(result);
-});
 
 // get all bouquets including their flowers for the user with the given userId
 app.get("/{userid}/bouquets", (request, response) => {

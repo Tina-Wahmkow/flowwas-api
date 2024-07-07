@@ -15,6 +15,8 @@
   "license": "ISC",
   "homepage": "https://github.com/Tina-Wahmkow/flowwas-api#readme",
   "dependencies": {
+    "@types/cors": "^2.8.17",
+    "cors": "^2.8.5",
     "csv-parse": "^5.5.6",
     "express": "^4.19.2",
     "oracledb": "^6.5.1"
