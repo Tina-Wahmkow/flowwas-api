@@ -35,7 +35,7 @@ export default class DBClient {
     }
   }
 
-  async executeQuery(query: string, binds: any[] = []): Promise<any> {
+  async executeQuery(query: string, binds: oracledb.BindParameters = {}): Promise<any> {
     if (!this.connection) {
       throw new Error("Not connected to the database");
     }

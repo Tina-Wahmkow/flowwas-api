@@ -1,8 +1,7 @@
-/*
-    Kp wie man erstellte Relationen löscht. Ich würde einfach nen neuen THesaurus erstellen
-*/
+/* Index erstellen auf der Tabelle flowers */
+CREATE INDEX flowers_index ON flowers(description) INDEXTYPE IS CTXSYS.CONTEXT;
 
-/* irgendein index muss noch erstellt werden, kp wie (INDEX) */
+/* Thesaurus erstellen */
 EXEC Ctx_Thes.Create_Thesaurus ( 'flower-thes', false );
 
 
@@ -27,6 +26,8 @@ EXEC Ctx_Thes.Create_Relation('flower-thes', 'Antipathie', 'SYN', 'Selbstverlieb
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Antipathie', 'SYN', 'Spießigkeit');
 /* --- */
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Antipathie', 'SYN', 'Gift');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Antipathie', 'SYN', 'Arroganz');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Antipathie', 'SYN', 'Hochmut');
 
 
 /* 
@@ -49,6 +50,10 @@ EXEC Ctx_Thes.Create_Relation('flower-thes', 'Trauer', 'SYN', 'Schmerz');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Trauer', 'SYN', 'Abschied');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Trauer', 'SYN', 'Erinnerung');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Trauer', 'SYN', 'Tod');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Trauer', 'SYN', 'Beileid');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Trauer', 'SYN', 'Kummer');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Trauer', 'SYN', 'Rücksichtnahme');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Trauer', 'SYN', 'Melancholie');
 
 
 /* 
@@ -77,6 +82,9 @@ EXEC Ctx_Thes.Create_Relation('flower-thes', 'Freude', 'SYN', 'Glücklich');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Freude', 'SYN', 'Glückseligkeit');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Freude', 'SYN', 'Vorfreude');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Freude', 'SYN', 'Geburtstag');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Freude', 'SYN', 'Heirat');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Hochzeit', 'SYN', 'Heirat');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Freude', 'SYN', 'Sympathie');
 
 
 /* 
@@ -118,6 +126,10 @@ EXEC Ctx_Thes.Create_Relation('flower-thes', 'Liebe', 'SYN', 'Frauentag');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Liebe', 'SYN', 'Hochzeit');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Liebe', 'SYN', 'Jahrestag');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Liebe', 'SYN', 'Valentinstag');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Liebe', 'SYN', 'Weiblichkeit');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Liebe', 'SYN', 'Jugend');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Liebe', 'SYN', 'Ewigkeit');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Liebe', 'SYN', 'Leidenschaft');
 
 
 /* 
@@ -135,18 +147,18 @@ EXEC Ctx_Thes.Create_Relation('flower-thes', 'Hoffnug', 'SYN', 'Kraft');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Hoffnug', 'SYN', 'Erholung');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Hoffnug', 'SYN', 'Gesundheit');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Hoffnug', 'SYN', 'Besserung');
-
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Hoffnug', 'SYN', 'Erneuerung');
 
 /* --- */
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Hoffnug', 'SYN', 'Schutz');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Hoffnug', 'SYN', 'Frühling');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Hoffnug', 'SYN', 'Fruchtbarkeit');
-EXEC Ctx_Thes.Create_Relation('flower-thes', 'Hoffnug', 'SYN', 'Erneuerung');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Hoffnug', 'SYN', 'Träumen');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Hoffnug', 'SYN', 'Traum');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Hoffnug', 'SYN', 'Geduld');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Hoffnug', 'SYN', 'Geburt');
-
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Hoffnug', 'SYN', 'Wachstum');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Hoffnug', 'SYN', 'Sicherheit');
 
 /* 
     Relationen für Erfolg
@@ -174,6 +186,20 @@ EXEC Ctx_Thes.Create_Relation('flower-thes', 'Erfolg', 'SYN', 'Veränderung');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Erfolg', 'SYN', 'Anerkennung');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Erfolg', 'SYN', 'Chance');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Erfolg', 'SYN', 'Zeremonie');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Erfolg', 'SYN', 'Würde');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Erfolg', 'SYN', 'Ausdauer');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Erfolg', 'SYN', 'Hartnäckigkeit');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Erfolg', 'SYN', 'Flexibilität');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Erfolg', 'SYN', 'Anpassungsfähigkeit');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Erfolg', 'SYN', 'Respekt');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Erfolg', 'SYN', 'Präsenz');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Erfolg', 'SYN', 'Stärke');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Erfolg', 'SYN', 'Mut');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Erfolg', 'SYN', 'Entschlossenheit');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Erfolg', 'SYN', 'Zähigkeit');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Erfolg', 'SYN', 'Ruhm');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Erfolg', 'SYN', 'Kampf');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Erfolg', 'SYN', 'Beharrlichkeit');
 
 
 /* 
@@ -193,6 +219,8 @@ EXEC Ctx_Thes.Create_Relation('flower-thes', 'Dankbarkeit', 'SYN', 'Vater');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Dankbarkeit', 'SYN', 'Papa');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Dankbarkeit', 'SYN', 'Danke');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Dankbarkeit', 'SYN', 'Dank');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Dankbarkeit', 'SYN', 'Demut');
+
 
 
 /* 
@@ -204,10 +232,22 @@ EXEC Ctx_Thes.Create_Relation('flower-thes', 'Gleichgültigkeit', 'SYN', 'Versch
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Gleichgültigkeit', 'SYN', 'Überfluss');
 
 
+
 /* somehow positiv aber keine Kategorie */
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Ehrlichkeit', 'SYN', 'Aufrichtigkeit');
 EXEC Ctx_Thes.Create_Relation('flower-thes', 'Ehrlichkeit', 'SYN', 'Natürlichkeit');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Ehrlichkeit', 'SYN', 'Ruhe');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Ehrlichkeit', 'SYN', 'Ausgeglichenheit');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Ehrlichkeit', 'SYN', 'Beständigkeit');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Ehrlichkeit', 'SYN', 'Menschlichkeit');
+EXEC Ctx_Thes.Create_Relation('flower-thes', 'Ehrlichkeit', 'SYN', 'Kreativität');
+
 
 
 /* siehe erste Zeile */
-EXEC ctx_ddl.sync_index('INDEX');
+EXEC ctx_ddl.sync_index('flower_index');
+
+/* Beispiel SELECT-Statement */
+SELECT *
+FROM flowers
+WHERE CONTAINS(flowers.description, 'SYN(Eifersucht, flower-thes)', 0) > 0;

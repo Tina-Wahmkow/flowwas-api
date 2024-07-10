@@ -1,1 +1,1 @@
-export type DBFLOWER = [number, string, string, string, string, string];
+export type DBFLOWER = [number, string, string, string, string, string, string];

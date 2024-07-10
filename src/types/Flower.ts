@@ -5,4 +5,5 @@ export default interface FLOWER {
   color: string;
   image: string;
   description: string;
+  associations: string[];
 }

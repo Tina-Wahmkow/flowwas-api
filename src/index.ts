@@ -1,16 +1,16 @@
 import express from "express";
 import cors from 'cors';
-import { getFlowers } from "./getFlowers";
-import { getAllFlowers } from "./getFlowers";
+import { getFlowersByFilter } from "./getFlowersByFilter";
 import deleteBouquet from "./deleteBouquet";
 import { readFromCSV } from "./dbImport";
-import { GETFLOWERSDTO } from "./types/GetFlowersDto";
+import { FLOWERFILTER } from "./types/FlowerFilter";
+import { getAllFlowers } from "./getAllFlowers";
 
 const app = express();
-const port = 3000;
+const port = 3002;
 
 app.use(cors({
-  origin: 'http://localhost:3002', //reacts origin
+  origin: `http://localhost:${port}`, //reacts origin
   methods: 'GET,POST,PUT,DELETE',
   credentials: true
 }));
@@ -26,8 +26,8 @@ app.listen(port, () => {
 
 // get flowers based on certain filter criteria, e.g. color (1), description (n), name (1), latin_name (1), association
 app.get("/flowers", async (request, response) => {
-  const result = await getFlowers(
-    (request.query as unknown as GETFLOWERSDTO).color
+  const result = await getFlowersByFilter(
+    (request.query as unknown as FLOWERFILTER)
   );
   response.json(result);
 });
