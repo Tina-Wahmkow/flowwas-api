@@ -42,9 +42,10 @@ app.listen(port, () => {
 
 // get flowers based on certain filter criteria, e.g. color (1), description (n), name (1), latin_name (1), association
 app.get("/flowers", async (request: Request, response: Response) => {
-  const result = await getFlowersByFilter(
-    (request.query as unknown as FLOWERFILTER)
-  );
+  const result = await getFlowersByFilter({
+    color: request.query.color && !Array.isArray(request.query.color) ? [request.query.color] : request.query.color,
+    searchTerm: request.query.searchTerm
+  } as FLOWERFILTER);
   response.json(result);
 });
 

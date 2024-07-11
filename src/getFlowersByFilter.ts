@@ -32,7 +32,7 @@ async function getFlowersFromDB(filter: FLOWERFILTER) {
       // geht ansonsten nicht kp
       query += `${!filter.color ? 'WHERE' : ' AND'} (LOWER(name) LIKE '%' || :name || '%' OR LOWER(latin_name) LIKE '%' || :name || '%' OR CONTAINS(description, 'SYN(' || :searchterm || ', flower-thes)', 0) > 0)`;
       bindVars['name'] = filter.searchTerm.toLowerCase();
-      bindVars['searchterm'] = capitalizeFirstLetter(filter.searchTerm.toLowerCase());
+      bindVars['searchterm'] = filter.searchTerm.toLowerCase();
     }
     
     return (await dbClient.executeQuery(query, bindVars)).rows as DBFLOWER[];
@@ -41,8 +41,4 @@ async function getFlowersFromDB(filter: FLOWERFILTER) {
   } finally {
     await dbClient.disconnect();
   }
-}
-
-function capitalizeFirstLetter(string: string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
 }
