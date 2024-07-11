@@ -28,7 +28,8 @@ async function getFlowersFromDB(filter: FLOWERFILTER) {
     }
 
     if (filter.searchTerm) {
-      // '||' -> concatenates 2 strings together
+      // '||' -> concatenates 2 strings together --> Bsp.: '%' || :name || '%' -> '%:name%'
+      // geht ansonsten nicht kp
       query += `${!filter.color ? 'WHERE' : ' AND'} (LOWER(name) LIKE '%' || :name || '%' OR LOWER(latin_name) LIKE '%' || :name || '%' OR CONTAINS(description, 'SYN(' || :searchterm || ', flower-thes)', 0) > 0)`;
       bindVars['name'] = filter.searchTerm.toLowerCase();
       bindVars['searchterm'] = capitalizeFirstLetter(filter.searchTerm.toLowerCase());
