@@ -2,7 +2,7 @@ import * as passportStrategy from "passport-local";
 import passport from "passport";
 import { findUser } from "./findUser";
 import bcrypt from "bcrypt";
-import { Express, NextFunction } from "express";
+import { Express, Request, Response, NextFunction } from "express";
 import { USER } from "../types/User";
 
 export function initPassport(app: Express) {
@@ -37,8 +37,8 @@ export function initPassport(app: Express) {
     });
 }
 
-export function isAuthenticated(req: Request, res: Response, next: NextFunction): Response | void {
-    if (req.headers.get("user"))
-        return next();
-    else res.ok;
+export async function isAuthenticated(req: Request, res: Response, next: NextFunction) {
+    // req.user returns a promise so we need to await here
+    if (await req.user) return next();
+    else res.status(401).json("You need to be logged in to use this feature.");
 }

@@ -41,7 +41,7 @@ export default class DBClient {
     }
 
     try {
-      const result = await this.connection.execute(query, binds);
+      const result = await this.connection.execute(query, binds, { autoCommit: true });
       return result;
     } catch (err) {
       console.error("Query execution failed: ", err);

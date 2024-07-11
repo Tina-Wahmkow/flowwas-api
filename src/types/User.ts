@@ -1,5 +1,5 @@
 export interface USER {
+    id: number;
     username: string;
     password: string;
-    isAdmin: boolean;
 }

@@ -16,10 +16,10 @@ export function convertFlowerData(data: DBFLOWER[]): FLOWER[] {
 }
 
 export function convertDbUserToUser(data: DBUSER): USER {
-    const [ _, username, password, isAdmin] = data
+    const [ id, username, password, ] = data
     return {
+        id,
         username, 
-        password, 
-        isAdmin
+        password
     };
 }
