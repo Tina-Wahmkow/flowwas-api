@@ -17,6 +17,7 @@ const port = 3002;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// allows the frontend to access the backend
 app.use(cors({
   origin: `http://localhost:3000`, //reacts origin!!
   methods: 'GET,POST,PUT,DELETE',
@@ -32,7 +33,7 @@ app.use(session({
 initPassport(app);
 
 app.get("/", (req, res) => {
-  res.send("Hello, TypeScript with Express!");
+  res.send("Hello, backend stuff is happening here yoo!");
 });
 
 app.listen(port, () => {
@@ -49,7 +50,7 @@ app.get("/flowers", async (request: Request, response: Response) => {
   response.json(result);
 });
 
-// Neuer Endpunkt zum Abrufen aller Inhalte und Spalten der Tabelle Flowers
+// new endpoint to access all the data of the table flowers
 app.get('/allFlowers', async (request: Request, response: Response) => {
   try {
     const data = await getAllFlowers();
@@ -68,7 +69,7 @@ app.post("/flowers/import-flowers-from-csv", (request: Request, response: Respon
 // -------------------         Authentication stuff         ------------------- //
 
 app.post('/login', passport.authenticate('local'), async (req: Request, response: Response) => {
-  response.json("You loggedin!!!");
+  response.json("You logged in!!!");
 });
 
 app.post('/register', async (req: Request, response: Response) => {
