@@ -40,6 +40,7 @@ export default async function deleteBouquet(bouquetId: string, userId: number) {
 
     await dbClient.executeQuery(deleteRelationQuery, [bouquetId]);
     await dbClient.executeQuery(deleteBouquetQuery, [bouquetId, userId]);
+    await dbClient.commitTransaction();
     return true;
   } catch (err) {
     console.error("Error in deleteBouquet: ", err);
