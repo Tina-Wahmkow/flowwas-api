@@ -90,8 +90,6 @@ app.post('/logout', function (req: Request, res: Response, next) {
 
 // -----   Bouquet related stuff (you need to be logged in to use that)   ----- //
 
-// TODO
-
 // get all bouquets including their flowers for the user with the given userId
 app.get("/bouquets", isAuthenticated, async (request: Request, response: Response) => {
   const user = await request.user as USER;
@@ -103,19 +101,41 @@ app.get("/bouquets", isAuthenticated, async (request: Request, response: Respons
   } else response.status(401).send("You need to be logged in to see your bouquets.")
 });
 
-// create a new bouquet or update an existing one
-app.put("/bouquets", isAuthenticated, (request: Request, response: Response) => {
-  const status = {
-    Status: "Running",
-  };
 
-  response.send(status);
+// TODO
+
+// create a new bouquet
+app.post("/bouquets", isAuthenticated, async (request: Request, response: Response) => {
+  const user = await request.user as USER;
+  if (user) {
+    const result = await getBouquetsForUser(user.id);
+    if (result.length) response.send(result);
+    else response.status(404).send(result);
+
+  } else response.status(401).send("You need to be logged in to see your bouquets.")
+});
+
+// update an existing bouquet 
+app.put("/bouquets", isAuthenticated, async (request: Request, response: Response) => {
+  const user = await request.user as USER;
+  if (user) {
+    const result = await getBouquetsForUser(user.id);
+    if (result.length) response.send(result);
+    else response.status(404).send(result);
+
+  } else response.status(401).send("You need to be logged in to see your bouquets.")
 });
 
 // delete a bouquet based on the given bouquetId
 app.delete("/bouquets/:bouquetId", isAuthenticated, async (request: Request, response: Response) => {
-  const result = await deleteBouquet(request.params.bouquetId);
+  const user = await request.user as USER;
+  console.log(user)
+  if (user) {
+    const result = await deleteBouquet(request.params.bouquetId, user.id);
 
-  if (result) response.status(204);
-  else response.status(404);
+    if (result) response.status(200).send("Bouquet deleted successfully.");
+    else response.status(404).send('None of your bouquets matched with the given id.');
+
+  } else response.status(401).send("You need to be logged in to delete one of your bouquets.")
+
 });
