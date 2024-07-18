@@ -14,7 +14,7 @@ async function getBouquetsFromDB(userId: number) {
     try {
         await dbClient.connect();
         const query = `
-            SELECT b.id as bouquetId, f.id as flowerid, f.name, f.latin_name, f.color, f.image, f.description, f.associations
+            SELECT b.id as bouquetId, b.name as bouquetName, f.id as flowerid, f.name as flowerName, f.latin_name, f.color, f.image, f.description, f.associations
             FROM bouquets b
             JOIN bouquet_has_flower bf ON bf.bouquet_id = b.id
             JOIN flowers f ON f.id = bf.flower_id

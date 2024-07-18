@@ -27,23 +27,25 @@ export function convertDbUserToUser(data: DBUSER): USER {
 }
 
 export function convertToBouquet(data: DBBOUQUET[]): BOUQUET[] {
-    const bouquetsMap: { [key: number]: FLOWER[] } = {};
+    const bouquetsMap: { [key: number]: { name: string, flowers: FLOWER[] } } = {};
 
     data.forEach((item) => {
         const bouquetId = item[0];
+        const bouquetName = item[1];
         item.shift();
         const flower: FLOWER = convertFlowerData([item as unknown as DBFLOWER])[0];
 
-        // bouquetIds werden in map gespeichert, wenn noch nicht da
-        if (!bouquetsMap[bouquetId]) bouquetsMap[bouquetId] = [];
+        // bouquetIds + namen werden in map gespeichert, wenn noch nicht da
+        if (!bouquetsMap[bouquetId]) bouquetsMap[bouquetId] = { name: bouquetName, flowers: [] };
 
         // Blumen werden zu einzelnen BouquetIds hinterlegt
-        bouquetsMap[bouquetId].push(flower);
+        bouquetsMap[bouquetId].flowers.push(flower);
     });
 
     // bouquetMap wird in response objekt umgewandelt und returned
     return Object.keys(bouquetsMap).map((key) => ({
         bouquetId: Number(key),
-        flowers: bouquetsMap[Number(key)]
+        name: bouquetsMap[Number(key)].name,
+        flowers: bouquetsMap[Number(key)].flowers
     }));
 }
