@@ -9,24 +9,11 @@ export async function updateBouquet(bouquet: UPDATEBOUQUETDTO, userId: number) {
     const dbClient = new DBClient();
     try {
         await dbClient.connect();
+        await deleteExistingRelations(dbClient, bouquet.bouquetId);
         const query = `INSERT INTO bouquet_has_flower (bouquet_id, flower_id) VALUES ( :bouquetId, :flowerId )`;
+        const binds = bouquet.flowerIds.map(flowerId => ({ bouquetId: bouquet.bouquetId, flowerId }));
 
-        for (const flowerId of bouquet.flowerIds) {
-            try {
-                const binds = {
-                    bouquetId: bouquet.bouquetId,
-                    flowerId
-                };
-                await dbClient.executeQuery(query, binds);
-            } catch (err) {
-                // Error: ORA-00001: unique constraint (C##MMDBA24_003.PK_BOUQUET) violated
-                const error = err as DBError
-                if ((error as DBError).errorNum === 1 && error.code === 'ORA-00001') {
-                    console.warn(`Skipping flower ${flowerId} due to unique constraint violation.`);
-                } else throw err;
-            }
-        }
-
+        await dbClient.executeMany(query, binds)
         await dbClient.commitTransaction();
         return true;
     } catch (err) {
@@ -34,4 +21,13 @@ export async function updateBouquet(bouquet: UPDATEBOUQUETDTO, userId: number) {
     } finally {
         await dbClient.disconnect();
     }
+}
+
+async function deleteExistingRelations(dbClient: DBClient, bouquetId: string) {
+    const deleteRelationQuery = `
+        DELETE
+        FROM bouquet_has_flower
+        WHERE bouquet_id = :bouquetId
+      `;
+    await dbClient.executeQuery(deleteRelationQuery, [bouquetId]);
 }
