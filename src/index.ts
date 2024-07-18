@@ -12,6 +12,7 @@ import { registerUser } from "./auth/registerUser";
 import { USER } from "./types/User";
 import { getBouquetsForUser } from "./getBouquetsForUser";
 import { createBouquet } from "./createBouquet";
+import { updateBouquet } from "./updateBouquet";
 
 const app = express();
 const port = 3002;
@@ -102,16 +103,13 @@ app.get("/bouquets", isAuthenticated, async (request: Request, response: Respons
   } else response.status(401).send("You need to be logged in to see your bouquets.")
 });
 
-
-// TODO
-
 // create a new bouquet
 app.post("/bouquets", isAuthenticated, async (request: Request, response: Response) => {
   const user = await request.user as USER;
   if (user) {
     const result = await createBouquet(request.body, user.id);
     if (result) response.status(200).send(`Bouquet "${request.body.name}" successfully created.`);
-    else response.status(409).send("Bouquet could not be created. One of the given flowerIds likely doesnt exist.");
+    else response.status(409).send("Bouquet could not be created. One of the given flowerIds likely doesn't exist.");
 
   } else response.status(401).send("You need to be logged in to see your bouquets.")
 });
@@ -120,9 +118,9 @@ app.post("/bouquets", isAuthenticated, async (request: Request, response: Respon
 app.put("/bouquets", isAuthenticated, async (request: Request, response: Response) => {
   const user = await request.user as USER;
   if (user) {
-    const result = await getBouquetsForUser(user.id);
-    if (result.length) response.send(result);
-    else response.status(404).send(result);
+    const result = await updateBouquet(request.body, user.id);
+    if (result) response.status(200).send(`Bouquet "${request.body.bouquetId}" successfully updated.`);
+    else response.status(409).send("Bouquet could not be updated. One of the given flowerIds likely doesn't exist.");
 
   } else response.status(401).send("You need to be logged in to see your bouquets.")
 });

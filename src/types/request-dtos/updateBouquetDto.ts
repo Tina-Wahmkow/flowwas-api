@@ -1,4 +1,4 @@
 export interface UPDATEBOUQUETDTO {
-    bouquetId: number;
+    bouquetId: string;
     flowerIds: number[];
 }
