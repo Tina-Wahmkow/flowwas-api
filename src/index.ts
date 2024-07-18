@@ -10,6 +10,7 @@ import { initPassport, isAuthenticated } from "./auth/passport";
 import passport from "passport";
 import { registerUser } from "./auth/registerUser";
 import { USER } from "./types/User";
+import { getBouquetsForUser } from "./getBouquetsForUser";
 
 const app = express();
 const port = 3002;
@@ -92,13 +93,14 @@ app.post('/logout', function (req: Request, res: Response, next) {
 // TODO
 
 // get all bouquets including their flowers for the user with the given userId
-app.get("/bouquets", isAuthenticated, (request: Request, response: Response) => {
-  // userid aus req.user
-  const status = {
-    Status: "Running",
-  };
+app.get("/bouquets", isAuthenticated, async (request: Request, response: Response) => {
+  const user = await request.user as USER;
+  if (user) {
+    const result = await getBouquetsForUser(user.id);
+    if (result.length) response.send(result);
+    else response.status(404).send(result);
 
-  response.send(status);
+  } else response.status(401).send("You need to be logged in to see your bouquets.")
 });
 
 // create a new bouquet or update an existing one

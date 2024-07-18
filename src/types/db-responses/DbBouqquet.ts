@@ -1,0 +1,1 @@
+export type DBBOUQUET = [ number, number, string, string, string, string, string, string ]

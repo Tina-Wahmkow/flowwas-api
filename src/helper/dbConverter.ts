@@ -1,3 +1,5 @@
+import { BOUQUET } from "../types/Bouquet";
+import { DBBOUQUET } from "../types/db-responses/DbBouqquet";
 import { DBFLOWER } from "../types/db-responses/DbFlower";
 import { DBUSER } from "../types/db-responses/DbUser";
 import FLOWER from "../types/Flower";
@@ -16,10 +18,32 @@ export function convertFlowerData(data: DBFLOWER[]): FLOWER[] {
 }
 
 export function convertDbUserToUser(data: DBUSER): USER {
-    const [ id, username, password, ] = data
+    const [id, username, password,] = data
     return {
         id,
-        username, 
+        username,
         password
     };
+}
+
+export function convertToBouquet(data: DBBOUQUET[]): BOUQUET[] {
+    const bouquetsMap: { [key: number]: FLOWER[] } = {};
+
+    data.forEach((item) => {
+        const bouquetId = item[0];
+        item.shift();
+        const flower: FLOWER = convertFlowerData([item as unknown as DBFLOWER])[0];
+
+        // bouquetIds werden in map gespeichert, wenn noch nicht da
+        if (!bouquetsMap[bouquetId]) bouquetsMap[bouquetId] = [];
+
+        // Blumen werden zu einzelnen BouquetIds hinterlegt
+        bouquetsMap[bouquetId].push(flower);
+    });
+
+    // bouquetMap wird in response objekt umgewandelt und returned
+    return Object.keys(bouquetsMap).map((key) => ({
+        bouquetId: Number(key),
+        flowers: bouquetsMap[Number(key)]
+    }));
 }
