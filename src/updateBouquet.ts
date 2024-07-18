@@ -1,7 +1,6 @@
 import DBClient from "./dbUtils/dbClient";
 import { UPDATEBOUQUETDTO } from "./types/request-dtos/updateBouquetDto";
 import { checkIfBouquetBelongsToUser } from "./helper/dbValidater";
-import { DBError } from "oracledb";
 
 export async function updateBouquet(bouquet: UPDATEBOUQUETDTO, userId: number) {
     if (!(await checkIfBouquetBelongsToUser(bouquet.bouquetId, userId)).length) return false;
