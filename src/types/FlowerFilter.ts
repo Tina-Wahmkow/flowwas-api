@@ -1,4 +1,4 @@
 export interface FLOWERFILTER {
     color?: string[];
-    searchTerm?: string; 
+    searchTerm?: string[];
 }

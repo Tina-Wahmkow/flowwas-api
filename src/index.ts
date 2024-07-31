@@ -48,7 +48,7 @@ app.listen(port, () => {
 app.get("/flowers", async (request: Request, response: Response) => {
   const result = await getFlowersByFilter({
     color: request.query.color && !Array.isArray(request.query.color) ? [request.query.color] : request.query.color,
-    searchTerm: request.query.searchTerm
+    searchTerm: request.query.searchTerm && !Array.isArray(request.query.searchTerm) ? [request.query.searchTerm] : request.query.searchTerm,
   } as FLOWERFILTER);
   response.json(result);
 });
