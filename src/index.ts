@@ -72,7 +72,7 @@ app.post("/flowers/import-flowers-from-csv", (request: Request, response: Respon
 // -------------------         Authentication stuff         ------------------- //
 
 app.post('/login', passport.authenticate('local'), async (req: Request, response: Response) => {
-  response.json("You logged in!!!");
+  response.json("You are now logged in!!!");
 });
 
 app.post('/register', async (req: Request, response: Response) => {
