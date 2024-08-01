@@ -36,7 +36,7 @@ app.use(session({
 initPassport(app);
 
 app.get("/", (req, res) => {
-  res.send("Hello, backend stuff is happening here yoo!");
+  res.send("Hello, backend stuff is happening here too!");
 });
 
 app.listen(port, () => {

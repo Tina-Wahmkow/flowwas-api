@@ -33,6 +33,8 @@ export function convertToBouquet(data: DBBOUQUET[]): BOUQUET[] {
         const bouquetId = item[0];
         const bouquetName = item[1];
         item.shift();
+        item.shift();
+        
         const flower: FLOWER = convertFlowerData([item as unknown as DBFLOWER])[0];
 
         // bouquetIds + namen werden in map gespeichert, wenn noch nicht da
