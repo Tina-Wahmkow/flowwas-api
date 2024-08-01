@@ -14,7 +14,7 @@ VALUES
         'Akazie',
         'Acacieae',
         'white',
-        '1_Acacieae_white.png',
+        '1_Acacieae.png',
         'Die Akazien (Acacieae) sind eine Tribus in der Unterfamilie Mimosengewächse (Mimosoideae) innerhalb der Pflanzenfamilie der Hülsenfrüchtler (Fabaceae). Die etwa 1400 Arten sind von den Subtropen bis Tropen der Neuen und Alten Welt weitverbreitet. Die 950 Arten der Gattung Acacia kommen überwiegend in Australien vor. Die Pflanze besonders für Liebe, Unsterblichkeit und Schutz.',
         'Liebe,Schutz,Unsterblichkeit'
     );
@@ -35,7 +35,7 @@ VALUES
         'Akazie',
         'Acacieae',
         'pink',
-        '2_Acacieae_pink.png',
+        '2_Acacieae.png',
         'Dieser Kleinbaum trumpft durch seine traumhaften rosaroten Blütendolden im Frühsommer auf. Sie verströmen einen süßlichen Duft und bilden einen sehr wichtigen Insektenfutterlieferant. Das saftig-grüne, gefiederte Laub bildet einen schönen farblichen Kontrast. Seine Schönheit schützt er mit Dornen an Ästen und Zweigen. Die Pflanze steht für Glückseligkeit, Freundschaft und Romantik.',
         'Glückseligkeit,Freundschaft,Romantik'
     );
