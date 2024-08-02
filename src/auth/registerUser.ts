@@ -15,6 +15,7 @@ async function createUserInDB(user: USER) {
         const query = `INSERT INTO users (username, password, isadmin) values (:username, :password, 0)`;
         const passwordHash = await bcrypt.hash(user.password, 10);
         await dbClient.executeQuery(query, {username: user.username, password: passwordHash})
+        await dbClient.commitTransaction();
         return true;
     } catch (err) {
         console.error("Error in findUserByName: ", err);

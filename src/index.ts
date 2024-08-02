@@ -76,7 +76,6 @@ app.post('/login', passport.authenticate('local'), async (req: Request, response
 });
 
 app.post('/register', async (req: Request, response: Response) => {
-  console.log(req.body)
   const res = await registerUser(req.body as USER);
   return res === true ?
     response.status(200).json("Successfully registered!")
@@ -98,7 +97,7 @@ app.get("/bouquets", isAuthenticated, async (request: Request, response: Respons
   if (user) {
     const result = await getBouquetsForUser(user.id);
     if (result.length) response.send(result);
-    else response.status(404).send(result);
+    else response.status(200).send([]);
 
   } else response.status(401).send("You need to be logged in to see your bouquets.")
 });
