@@ -245,7 +245,7 @@ EXEC Ctx_Thes.Create_Relation('flower-thes', 'Ehrlichkeit', 'SYN', 'Kreativität
 
 
 /* siehe erste Zeile */
-EXEC ctx_ddl.sync_index('flower_index');
+EXEC ctx_ddl.sync_index('flowers_index');
 
 /* Beispiel SELECT-Statement */
 SELECT *

@@ -49,10 +49,10 @@ async function getFlowersFromDB(filter: FLOWERFILTER) {
             )`
 
         }
-        nameCondition += `LOWER(name) LIKE '%' || :name${index} || '%'`
-        latinNameCondition += `LOWER(latin_name) LIKE '%' || :name${index} || '%'`
+        nameCondition += `LOWER(name) LIKE '%' || :lower_name${index} || '%'`
+        latinNameCondition += `LOWER(latin_name) LIKE '%' || :lower_name${index} || '%'`
         bindVars[`name${index}`] = name;
-
+        bindVars[`lower_name${index}`] = name.toLowerCase();
       })
 
       searchTermCondition = `
