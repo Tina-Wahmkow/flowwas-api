@@ -66,7 +66,7 @@ async function getFlowersFromDB(filter: FLOWERFILTER) {
     /* in sqlScripts\select_statements_examples.sql kann ein Beispiel für diese Query nachgeschaut werden */
     const query = `
       WITH flower_matches0 AS (
-        SELECT *
+        SELECT id, name, latin_name, color, image, description, associations
         FROM flowers
         WHERE 1=1
         ${colorCondition}

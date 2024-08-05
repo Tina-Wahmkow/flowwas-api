@@ -14,6 +14,7 @@ import { getBouquetsForUser } from "./getBouquetsForUser";
 import { createBouquet } from "./createBouquet";
 import { updateBouquet } from "./updateBouquet";
 import getFlowerImage from "./getFlowerImage";
+import { getFlowersByFilterOr } from "./getFlowersByFilterOr";
 
 const app = express();
 const port = 3002;
@@ -45,9 +46,18 @@ app.listen(port, () => {
   console.log("Available under URL: http://localhost:", port);
 });
 
-// get flowers based on certain filter criteria, e.g. color (1), description (n), name (1), latin_name (1), association
+// get flowers based on certain filter criteria AND, e.g. color (1), description (n), name (1), latin_name (1), association
 app.get("/flowers", async (request: Request, response: Response) => {
   const result = await getFlowersByFilter({
+    color: request.query.color && !Array.isArray(request.query.color) ? [request.query.color] : request.query.color,
+    searchTerm: request.query.searchTerm && !Array.isArray(request.query.searchTerm) ? [request.query.searchTerm] : request.query.searchTerm,
+  } as FLOWERFILTER);
+  response.json(result);
+});
+
+// get flowers based on certain filter criteria OR, e.g. color (1), description (n), name (1), latin_name (1), association
+app.get("/flowers-or", async (request: Request, response: Response) => {
+  const result = await getFlowersByFilterOr({
     color: request.query.color && !Array.isArray(request.query.color) ? [request.query.color] : request.query.color,
     searchTerm: request.query.searchTerm && !Array.isArray(request.query.searchTerm) ? [request.query.searchTerm] : request.query.searchTerm,
   } as FLOWERFILTER);
