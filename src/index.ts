@@ -13,6 +13,7 @@ import { USER } from "./types/User";
 import { getBouquetsForUser } from "./getBouquetsForUser";
 import { createBouquet } from "./createBouquet";
 import { updateBouquet } from "./updateBouquet";
+import getFlowerImage from "./getFlowerImage";
 
 const app = express();
 const port = 3002;
@@ -53,6 +54,18 @@ app.get("/flowers", async (request: Request, response: Response) => {
   response.json(result);
 });
 
+// get Flower image by the flowerid
+app.get("/image/:flowerid", async (request: Request, response: Response) => {
+  const result = await getFlowerImage(request.params.flowerid);
+  if (!result) {
+    return response.status(404).send('Image not found');
+  } else {
+    response.setHeader('Content-Type', 'image/jpeg');
+    response.setHeader('Content-Disposition', `inline; filename="${result.imageName}"`);
+    response.send(result.imageData);
+  }
+});
+
 // new endpoint to access all the data of the table flowers
 app.get('/allFlowers', async (request: Request, response: Response) => {
   try {
@@ -64,8 +77,8 @@ app.get('/allFlowers', async (request: Request, response: Response) => {
   }
 });
 
-app.post("/flowers/import-flowers-from-csv", (request: Request, response: Response) => {
-  readFromCSV();
+app.post("/flowers/import-flowers-from-csv", async (request: Request, response: Response) => {
+  void readFromCSV();
   response.status(204)
 });
 
