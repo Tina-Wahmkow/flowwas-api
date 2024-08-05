@@ -6,7 +6,14 @@ import { DBFLOWER } from "./types/db-responses/DbFlower";
 
 export async function getFlowersByFilterOr(filter: FLOWERFILTER) {
   const res = await getFlowersFromDB(filter);
-  if (res) return convertFlowerData(res);
+  if (res) {
+    const flowers = convertFlowerData(res);
+    const response = Array.from(new Set(flowers.map(a => a.id)))
+      .map(id => {
+        return flowers.find(a => a.id === id)
+      })
+    return response
+  }
   else return "no Results found";
 }
 
